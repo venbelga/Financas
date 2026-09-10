@@ -10,6 +10,7 @@ type AuthContextData = {
     user: User;
     signUp: (nome: string, email: string, password: string) => Promise<void>;
     loadingAuth: boolean;
+    signed: boolean;
 };
 
 export const AuthContext = createContext<AuthContextData | null>(null);
@@ -37,7 +38,7 @@ export default function AuthProvider({children}: { children: React.ReactNode }) 
     }
 
     return (
-        <AuthContext.Provider value={{ user, signUp, loadingAuth }}>
+        <AuthContext.Provider value={{ user, signUp, loadingAuth, signed: !!user }}>
             {children}
         </AuthContext.Provider>
     );
