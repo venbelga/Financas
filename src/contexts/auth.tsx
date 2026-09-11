@@ -16,6 +16,7 @@ type AuthContextData = {
     loadingAuth: boolean;
     loading: boolean;
     signed: boolean;
+    signOut: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextData | null>(null);
@@ -50,6 +51,7 @@ export default function AuthProvider({children}: { children: React.ReactNode }) 
             }
         }   
 
+        setLoading(false);
         loadStorage();
     }, []);
 
@@ -95,8 +97,14 @@ export default function AuthProvider({children}: { children: React.ReactNode }) 
         }
     }
 
+    async function signOut() {
+        await AsyncStorage.clear().then(() => {
+            setUser(null as any);
+        });
+    }
+
     return (
-        <AuthContext.Provider value={{ user, signUp, signIn, loadingAuth, loading, signed: !!user }}>
+        <AuthContext.Provider value={{ user, signUp, signIn, loadingAuth, loading, signed: !!user, signOut }}>
             {children}
         </AuthContext.Provider>
     );
