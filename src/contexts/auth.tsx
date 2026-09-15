@@ -87,7 +87,7 @@ export default function AuthProvider({children}: { children: React.ReactNode }) 
 
             setUser({
                 id: id,
-                nome: name,
+                name: name,
                 email: email
             });
             setLoadingAuth(false);
