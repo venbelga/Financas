@@ -4,14 +4,14 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type User = {
-    nome: string;
+    name: string;
     id: string;
     email: string;
 };
 
 type AuthContextData = {
     user: User;
-    signUp: (nome: string, email: string, password: string) => Promise<void>;
+    signUp: (name: string, email: string, password: string) => Promise<void>;
     signIn: (email: string, password: string) => Promise<void>;
     loadingAuth: boolean;
     loading: boolean;
